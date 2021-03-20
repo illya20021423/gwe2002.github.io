@@ -1,0 +1,94 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>Clicker</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<script type="text/javascript">
+
+		var money = localStorage.getItem("ur_money");
+		if (localStorage.getItem("ur_money")>0) {money=localStorage.getItem("ur_money")} else {money=0}
+		money = parseInt(money);
+		function countMoney(){
+			money += factor;
+			localStorage.setItem("ur_money", money);
+			document.getElementById("money").innerHTML = money;
+			document.getElementById("factor").innerHTML = factor;
+			document.getElementById("valueFactor").innerHTML = valueFactor;
+		};		
+		var factor = localStorage.getItem("ur_factor");
+		if (localStorage.getItem("ur_factor")>1) {factor=localStorage.getItem("ur_factor")} else {factor=1}
+		factor = parseInt(factor);
+		
+		var valueFactor = localStorage.getItem("ur_valueFactor");
+		if (localStorage.getItem("ur_valueFactor")>10) {valueFactor=localStorage.getItem("ur_valueFactor")} else {valueFactor=10}
+		valueFactor = parseInt(valueFactor);
+		function countFactor(){
+			if (money>=valueFactor){
+				money-=valueFactor;
+
+				factor++;
+				localStorage.setItem("ur_factor", factor);
+				valueFactor = valueFactor*2;
+				localStorage.setItem("ur_valueFactor", valueFactor);
+				document.getElementById("factor").innerHTML = factor;
+				document.getElementById("money").innerHTML = money;
+				document.getElementById("valueFactor").innerHTML = valueFactor;
+			}
+		}
+
+		var pasMoney = localStorage.getItem("ur_pasMoney");
+		if (localStorage.getItem("ur_pasMoney")>0) {pasMoney=localStorage.getItem("ur_pasMoney")} else {pasMoney=0};
+		pasMoney = parseInt(pasMoney);
+		var valuePasMoney = localStorage.getItem("ur_valuePasMoney");
+		if (localStorage.getItem("ur_valuePasMoney")>0) {valuePasMoney=localStorage.getItem("ur_valuePasMoney")} else {valuePasMoney=15};
+		valuePasMoney = parseInt(valuePasMoney);
+		function countPasMoney(){
+  			if (money>=valuePasMoney){
+  				money-=valuePasMoney;
+  				pasMoney++;
+  				localStorage.setItem("ur_pasMoney", pasMoney);
+  				valuePasMoney*=2;
+  				localStorage.setItem("ur_valuePasMoney", valuePasMoney);
+				document.getElementById("factor").innerHTML = factor;
+				document.getElementById("money").innerHTML = money;
+				document.getElementById("valueFactor").innerHTML = valueFactor;  
+				document.getElementById("pasMoney").innerHTML = pasMoney; 
+				document.getElementById("valuePasMoney").innerHTML = valuePasMoney;				
+
+  			}
+		};
+
+		setInterval(function(){
+  			money+=pasMoney;
+  			document.getElementById("money").innerHTML = money;
+  			document.getElementById("factor").innerHTML = factor;
+  			document.getElementById("valueFactor").innerHTML = valueFactor;
+  			document.getElementById("pasMoney").innerHTML = pasMoney; 
+  			document.getElementById("valuePasMoney").innerHTML = valuePasMoney;	
+		}, 1000);
+
+		//infUpdate(function(){
+  			//document.getElementById("money").innerHTML = money;
+  			//document.getElementById("factor").innerHTML = factor;
+  			//document.getElementById("valueFactor").innerHTML = valueFactor; 
+  			//document.getElementById("pasMoney").innerHTML = pasMoney;  
+  			//document.getElementById("valuePasMoney").innerHTML = valuePasMoney;	
+		//}, 100);
+
+	</script>
+
+	<button class="button" onclick="countMoney()">Работать</button>
+	<p>Денег: <a id="money"></p>
+
+	<button class="button" onclick="countFactor()">Купить множитель</button>
+	<p>Текущий множитель: <a id="factor"></p>
+	<p>Цена множителя: <a id="valueFactor"></p>
+
+	<button class="button" onclick="countPasMoney()">Купить бизнес</button>
+	<p>Текущий пассивный доход: <a id="pasMoney"></p>
+	<p>Цена бизнеса: <a id="valuePasMoney"></p>
+</body>
+</html>
