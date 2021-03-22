@@ -36,6 +36,7 @@
 				document.getElementById("factor").innerHTML = factor;
 				document.getElementById("money").innerHTML = money;
 				document.getElementById("valueFactor").innerHTML = valueFactor;
+
 			}
 		}
 
@@ -56,18 +57,48 @@
 				document.getElementById("money").innerHTML = money;
 				document.getElementById("valueFactor").innerHTML = valueFactor;  
 				document.getElementById("pasMoney").innerHTML = pasMoney; 
-				document.getElementById("valuePasMoney").innerHTML = valuePasMoney;				
+				document.getElementById("valuePasMoney").innerHTML = valuePasMoney;	
+				document.getElementById("pasMoney_Two").innerHTML = pasMoney_Two;
+				document.getElementById("valuePasMoney_Two").innerHTML = valuePasMoney_Two;
 
   			}
 		};
 
+		//--------------------------------------------------------------------------
+		var pasMoney_Two = localStorage.getItem("ur_pasMoney_Two");
+		if (localStorage.getItem("ur_pasMoney_Two")>0) {pasMoney_Two=localStorage.getItem("ur_pasMoney_Two")} else {pasMoney_Two=0};
+		pasMoney_Two = parseInt(pasMoney_Two);
+		var valuePasMoney_Two = localStorage.getItem("ur_valuePasMoney_Two");
+		if (localStorage.getItem("ur_valuePasMoney_Two")>0) {valuePasMoney_Two=localStorage.getItem("ur_valuePasMoney_Two")} else {valuePasMoney_Two=20};
+		valuePasMoney_Two = parseInt(valuePasMoney_Two);
+		function countPasMoney_Two(){
+  			if (money>=valuePasMoney_Two){
+  				money-=valuePasMoney_Two;
+  				pasMoney_Two+=2;
+  				localStorage.setItem("ur_pasMoney_Two", pasMoney_Two);
+  				valuePasMoney_Two*=2;
+  				localStorage.setItem("ur_valuePasMoney_Two", valuePasMoney_Two);
+				document.getElementById("factor").innerHTML = factor;
+				document.getElementById("money").innerHTML = money;
+				document.getElementById("valueFactor").innerHTML = valueFactor;  
+				document.getElementById("pasMoney").innerHTML = pasMoney; 
+				document.getElementById("valuePasMoney").innerHTML = valuePasMoney;				
+				document.getElementById("pasMoney_Two").innerHTML = pasMoney_Two;
+				document.getElementById("valuePasMoney_Two").innerHTML = valuePasMoney_Two;
+  			}
+		};
+		//--------------------------------------------------------------------------
+
 		setInterval(function(){
   			money+=pasMoney;
+  			money+=pasMoney_Two;
   			document.getElementById("money").innerHTML = money;
   			document.getElementById("factor").innerHTML = factor;
   			document.getElementById("valueFactor").innerHTML = valueFactor;
   			document.getElementById("pasMoney").innerHTML = pasMoney; 
   			document.getElementById("valuePasMoney").innerHTML = valuePasMoney;	
+  			document.getElementById("pasMoney_Two").innerHTML = pasMoney_Two;
+			document.getElementById("valuePasMoney_Two").innerHTML = valuePasMoney_Two;
 		}, 1000);
 
 		//infUpdate(function(){
@@ -90,5 +121,9 @@
 	<button class="button" onclick="countPasMoney()">Купить бизнес</button>
 	<p>Текущий пассивный доход: <a id="pasMoney"></p>
 	<p>Цена бизнеса: <a id="valuePasMoney"></p>
+	
+	<button class="button" onclick="countPasMoney_Two()">Купить бизнес</button>
+	<p>Текущий пассивный доход: <a id="pasMoney_Two"></p>
+	<p>Цена бизнеса: <a id="valuePasMoney_Two"></p>
 </body>
 </html>
