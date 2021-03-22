@@ -11,7 +11,7 @@
 		var money = localStorage.getItem("ur_money");
 		if (localStorage.getItem("ur_money")>0) {money=localStorage.getItem("ur_money")} else {money=0}
 		money = parseInt(money);
-		function countMoney(){
+		function countMoney(){ // функция добавить деньги при нажатии
 			money += factor;
 			localStorage.setItem("ur_money", money);
 			document.getElementById("money").innerHTML = money;
@@ -25,7 +25,7 @@
 		var valueFactor = localStorage.getItem("ur_valueFactor");
 		if (localStorage.getItem("ur_valueFactor")>10) {valueFactor=localStorage.getItem("ur_valueFactor")} else {valueFactor=10}
 		valueFactor = parseInt(valueFactor);
-		function countFactor(){
+		function countFactor(){ // функция множителя клика
 			if (money>=valueFactor){
 				money-=valueFactor;
 
@@ -46,7 +46,7 @@
 		var valuePasMoney = localStorage.getItem("ur_valuePasMoney");
 		if (localStorage.getItem("ur_valuePasMoney")>0) {valuePasMoney=localStorage.getItem("ur_valuePasMoney")} else {valuePasMoney=15};
 		valuePasMoney = parseInt(valuePasMoney);
-		function countPasMoney(){
+		function countPasMoney(){ // функция бизнеса1
   			if (money>=valuePasMoney){
   				money-=valuePasMoney;
   				pasMoney++;
@@ -64,14 +64,13 @@
   			}
 		};
 
-		//--------------------------------------------------------------------------
 		var pasMoney_Two = localStorage.getItem("ur_pasMoney_Two");
 		if (localStorage.getItem("ur_pasMoney_Two")>0) {pasMoney_Two=localStorage.getItem("ur_pasMoney_Two")} else {pasMoney_Two=0};
 		pasMoney_Two = parseInt(pasMoney_Two);
 		var valuePasMoney_Two = localStorage.getItem("ur_valuePasMoney_Two");
 		if (localStorage.getItem("ur_valuePasMoney_Two")>0) {valuePasMoney_Two=localStorage.getItem("ur_valuePasMoney_Two")} else {valuePasMoney_Two=20};
 		valuePasMoney_Two = parseInt(valuePasMoney_Two);
-		function countPasMoney_Two(){
+		function countPasMoney_Two(){ // функция бизнеса2
   			if (money>=valuePasMoney_Two){
   				money-=valuePasMoney_Two;
   				pasMoney_Two+=2;
@@ -87,11 +86,11 @@
 				document.getElementById("valuePasMoney_Two").innerHTML = valuePasMoney_Two;
   			}
 		};
-		//--------------------------------------------------------------------------
 
 		setInterval(function(){
   			money+=pasMoney;
   			money+=pasMoney_Two;
+  			localStorage.setItem("ur_money", money);
   			document.getElementById("money").innerHTML = money;
   			document.getElementById("factor").innerHTML = factor;
   			document.getElementById("valueFactor").innerHTML = valueFactor;
